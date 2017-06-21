@@ -29,16 +29,27 @@ def add_to_inventory(inventory, added_items):
 def print_table(inventory, order):
     if order == "count,asc":
         sorted_values = sorted(list(set(inventory.values())), reverse=False)
-    if order == "count,desc":
+    elif order == "count,desc":
         sorted_values = sorted(list(set(inventory.values())), reverse=True)
-    if order == None:
+    elif order == None:
         sorted_values = list(set(inventory.values()))
+    else:
+        print("Something went wrong with the order parameter")
+        exit()
+    max_len = len(max(inventory, key=len))
+    hyphen_len = max_len*2 +1
+    align_right = "{:>%d} {:>%d}" %(max_len, max_len)
+    print("Inventory:")
+    print(align_right.format("Count", "Item"))
+    print("-"*hyphen_len)
     count = 0
-    for a in range(len(sorted_values)):
+    for number in range(len(sorted_values)):
         for key, value in inv.items():
             if sorted_values[count] == value:
-                print(value,key)
+                print(align_right.format(value,key))
         count +=1
+    print("-"*hyphen_len)
+    print("Total number of items: " ,sum(inventory.values()))
 
 
 # Imports new inventory items from a file
