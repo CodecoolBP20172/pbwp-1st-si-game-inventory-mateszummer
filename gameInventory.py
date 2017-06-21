@@ -4,18 +4,18 @@
 # Displays the inventory.
 def display_inventory(inventory):
     print("Inventory:\n")
-    for x in inventory:
-        print (inventory[x],x)
+    for key, value in inventory.items():
+        print (value, key)
     print("Total number of items: " ,sum(inventory.values()))
 
 
 # Adds to the inventory dictionary a list of items from added_items.
 def add_to_inventory(inventory, added_items):
-    for x in added_items:
-        if x in inventory.keys():
-            inventory[x] += 1
+    for item in added_items:
+        if item in inventory.keys():
+            inventory[item] += 1
         else:
-            inventory[x] = 1
+            inventory[item] = 1
     return inventory
 
 
@@ -26,8 +26,19 @@ def add_to_inventory(inventory, added_items):
 # - "count,desc" means the table is ordered by count (of items in the inventory)
 #   in descending order
 # - "count,asc" means the table is ordered by count in ascending order
-def print_table(inventory, order=None):
-    pass
+def print_table(inventory, order):
+    if order == "count,asc":
+        sorted_values = sorted(list(set(inventory.values())), reverse=False)
+    if order == "count,desc":
+        sorted_values = sorted(list(set(inventory.values())), reverse=True)
+    if order == None:
+        sorted_values = list(set(inventory.values()))
+    count = 0
+    for a in range(len(sorted_values)):
+        for key, value in inv.items():
+            if sorted_values[count] == value:
+                print(value,key)
+        count +=1
 
 
 # Imports new inventory items from a file
