@@ -2,11 +2,13 @@
 # so they work according to the specification
 
 # Displays the inventory.
+
+
 def display_inventory(inventory):
     print("Inventory:\n")
     for key, value in inventory.items():
         print (value, key)
-    print("Total number of items: " ,sum(inventory.values()))
+    print("Total number of items: ", sum(inventory.values()))
 
 
 # Adds to the inventory dictionary a list of items from added_items.
@@ -31,25 +33,25 @@ def print_table(inventory, order):
         sorted_values = sorted(list(set(inventory.values())), reverse=False)
     elif order == "count,desc":
         sorted_values = sorted(list(set(inventory.values())), reverse=True)
-    elif order == None:
+    elif order is None:
         sorted_values = list(set(inventory.values()))
     else:
         print("Something went wrong with the order parameter")
         exit()
     max_len = len(max(inventory, key=len))
-    hyphen_len = max_len*2 +1
-    align_right = "{:>%d} {:>%d}" %(max_len, max_len)
+    hyphen_len = max_len * 2 + 1
+    align_right = "{:>%d} {:>%d}" % (max_len, max_len)
     print("Inventory:")
     print(align_right.format("Count", "Item"))
-    print("-"*hyphen_len)
+    print("-" * hyphen_len)
     count = 0
     for number in range(len(sorted_values)):
         for key, value in inv.items():
             if sorted_values[count] == value:
-                print(align_right.format(value,key))
-        count +=1
-    print("-"*hyphen_len)
-    print("Total number of items: " ,sum(inventory.values()))
+                print(align_right.format(value, key))
+        count += 1
+    print("-" * hyphen_len)
+    print("Total number of items: ", sum(inventory.values()))
 
 
 # Imports new inventory items from a file
@@ -58,7 +60,7 @@ def print_table(inventory, order):
 # The file format is plain text with comma separated values (CSV).
 def import_inventory(inventory, filename):
     import csv
-    if filename == None:
+    if filename is None:
         filename = "import_inventory.csv"
     with open(filename) as csvfile:
         for item in csv.reader(csvfile):
@@ -74,7 +76,7 @@ def import_inventory(inventory, filename):
 def export_inventory(inventory, filename):
     import csv
     export_list = []
-    if filename == None:
+    if filename is None:
         filename = "export_inventory.csv"
     with open(filename, 'w') as myfile:
         wr = csv.writer(myfile)
