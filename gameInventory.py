@@ -57,7 +57,12 @@ def print_table(inventory, order):
 # "import_inventory.csv". The import automatically merges items by name.
 # The file format is plain text with comma separated values (CSV).
 def import_inventory(inventory, filename="import_inventory.csv"):
-    pass
+    import csv
+    with open("test_inventory.csv") as csvfile:
+        for item in csv.reader(csvfile):
+            items = item
+    add_to_inventory(inventory, items)
+    return inventory
 
 
 # Exports the inventory into a .csv file.
