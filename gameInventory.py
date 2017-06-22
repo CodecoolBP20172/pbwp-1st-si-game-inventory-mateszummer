@@ -58,6 +58,8 @@ def print_table(inventory, order):
 # The file format is plain text with comma separated values (CSV).
 def import_inventory(inventory, filename):
     import csv
+    if filename == None:
+        filename = "import_inventory.csv"
     with open(filename) as csvfile:
         for item in csv.reader(csvfile):
             items = item
@@ -70,4 +72,13 @@ def import_inventory(inventory, filename):
 # called "export_inventory.csv". The file format is the same plain text
 # with comma separated values (CSV).
 def export_inventory(inventory, filename="export_inventory.csv"):
-    pass
+    import csv
+    export_list = []
+    if filename == None:
+        filename = "export_inventory"
+    with open(filename, 'w') as myfile:
+        wr = csv.writer(myfile)
+        for key, value in inventory.items():
+            for count in range(value):
+                export_list.append(key)
+        wr.writerow(export_list)
