@@ -71,11 +71,11 @@ def import_inventory(inventory, filename):
 # if the filename argument is None it creates and overwrites a file
 # called "export_inventory.csv". The file format is the same plain text
 # with comma separated values (CSV).
-def export_inventory(inventory, filename="export_inventory.csv"):
+def export_inventory(inventory, filename):
     import csv
     export_list = []
     if filename == None:
-        filename = "export_inventory"
+        filename = "export_inventory.csv"
     with open(filename, 'w') as myfile:
         wr = csv.writer(myfile)
         for key, value in inventory.items():
