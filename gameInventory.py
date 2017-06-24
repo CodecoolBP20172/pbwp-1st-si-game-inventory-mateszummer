@@ -78,8 +78,8 @@ def export_inventory(inventory, filename):
     export_list = []
     if filename is None:
         filename = "export_inventory.csv"
-    with open(filename, 'w') as myfile:
-        wr = csv.writer(myfile)
+    with open(filename, 'w') as csvfile:
+        wr = csv.writer(csvfile)
         for key, value in inventory.items():
             for count in range(value):
                 export_list.append(key)
