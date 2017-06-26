@@ -30,15 +30,11 @@ def add_to_inventory(inventory, added_items):
 #   in descending order
 # - "count,asc" means the table is ordered by count in ascending order
 def print_table(inventory, order):
-    if order == "count,asc":
-        sorted_values = sorted(list(set(inventory.values())), reverse=False)
-    elif order == "count,desc":
-        sorted_values = sorted(list(set(inventory.values())), reverse=True)
-    elif order is None:
+    order_dict = {"count,asc": False, "count,desc": True} #just trying out with dict
+    if order is None:
         sorted_values = list(set(inventory.values()))
     else:
-        print("Something went wrong with the order parameter")
-        exit()
+        sorted_values = sorted(list(set(inventory.values())), reverse=order_dict[order])
     max_len = len(max(inventory, key=len))
     hyphen_len = max_len * 2 + 1
     align_right = "{:>%d} {:>%d}" % (max_len, max_len)
