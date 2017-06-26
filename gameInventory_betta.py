@@ -16,6 +16,8 @@ def add_to_inventory(inventory, added_items):
     for item in added_items:
         if item in inventory.keys():
             inventory[item] += 1
+        elif item == "": #empty values will not be added (import inventory, new line related)
+            ...
         else:
             inventory[item] = 1
     return inventory
@@ -44,12 +46,10 @@ def print_table(inventory, order):
     print("Inventory:")
     print(align_right.format("Count", "Item"))
     print("-" * hyphen_len)
-    count = 0
-    for number in range(len(sorted_values)):
+    for number in sorted_values:
         for key, value in inv.items():
-            if sorted_values[count] == value:
+            if number == value: #reformed,useless count removed
                 print(align_right.format(value, key))
-        count += 1
     print("-" * hyphen_len)
     print("Total number of items: ", sum(inventory.values()))
 
@@ -59,13 +59,12 @@ def print_table(inventory, order):
 # "import_inventory.csv". The import automatically merges items by name.
 # The file format is plain text with comma separated values (CSV).
 def import_inventory(inventory, filename):
-    import csv
+  import csv
     if filename is None:
         filename = "import_inventory.csv"
     with open(filename) as csvfile:
-        for item in csv.reader(csvfile):
-            items = item
-    add_to_inventory(inventory, items)
+        for row in csv.reader(csvfile):
+            add_to_inventory(inventory, row) #useless loop removed, named properly(row)
     return inventory
 
 
