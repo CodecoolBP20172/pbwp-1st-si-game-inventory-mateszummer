@@ -3,7 +3,6 @@
 
 # Displays the inventory.
 
-
 def display_inventory(inventory):
     print("Inventory:\n")
     for key, value in inventory.items():
